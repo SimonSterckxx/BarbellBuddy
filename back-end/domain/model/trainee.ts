@@ -1,4 +1,3 @@
-import { Role } from "../../types";
 import { User } from "./user";
 
 export class Trainee extends User {
@@ -11,5 +10,14 @@ export class Trainee extends User {
         this.firstName = trainee.firstName
         this.lastName = trainee.lastName
         this.weight = trainee.weight
+    }
+
+    equals(other: Trainee) {
+        return (
+            super.equals(other) &&
+            this.firstName === other.firstName &&
+            this.lastName === other.lastName &&
+            this.weight === other.weight
+        )
     }
 }

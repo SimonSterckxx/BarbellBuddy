@@ -13,4 +13,13 @@ export class Coach extends User {
         this.lastName = coach.lastName
         this.trainees = coach.trainees
     }
+
+    equals(other: Coach) {
+        return (
+            super.equals(other) &&
+            this.firstName === other.firstName &&
+            this.lastName === other.lastName &&
+            this.trainees === other.trainees
+        )
+    }
 }

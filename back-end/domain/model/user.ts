@@ -12,4 +12,12 @@ export class User {
         this.password = user.password
         this.role = user.role
     }
+
+    equals(other: User) {
+        return (
+            this.username === other.username &&
+            this.password === other.password &&
+            this.role === other.role
+        )
+    }
 }
