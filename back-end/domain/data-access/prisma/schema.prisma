@@ -8,21 +8,34 @@ datasource db {
 }
 
 model User {
-    id       Int    @id @default(autoincrement())
-    username String @unique
-    password String
-    role     String @default("User")
+    id               Int               @id @default(autoincrement())
+    username         String            @unique
+    password         String
+    role             String            @default("User")
+    createdAt        DateTime          @default(now())
+    age              Int
+    weight           Float
+    height           Float
+    exercises        Exercise[]
+    workoutTemplates WorkoutTemplate[]
 }
 
-model Coach {
-    id        Int    @id @default(autoincrement())
-    firstName String
-    lastName  String
+model Exercise {
+    id               Int               @id @default(autoincrement())
+    name             String
+    user             User              @relation(fields: [userId], references: [id])
+    userId           Int
+    muscleGroup      String
+    favorite         Boolean
+    workoutTemplates WorkoutTemplate[]
 }
 
-model Trainee {
-    id        Int    @id @default(autoincrement())
-    firstName String
-    lastName  String
-    weight    Int
+model WorkoutTemplate {
+    id          Int        @id @default(autoincrement())
+    name        String
+    user        User       @relation(fields: [userId], references: [id])
+    userId      Int
+    description String
+    lastUse     DateTime?
+    exercises   Exercise[]
 }
