@@ -18,16 +18,18 @@ model User {
     height           Float
     exercises        Exercise[]
     workoutTemplates WorkoutTemplate[]
+    workouts         Workout[]
 }
 
 model Exercise {
-    id               Int               @id @default(autoincrement())
-    name             String
-    user             User              @relation(fields: [userId], references: [id])
-    userId           Int
-    muscleGroup      String
-    favorite         Boolean
-    workoutTemplates WorkoutTemplate[]
+    id          Int               @id @default(autoincrement())
+    name        String
+    user        User              @relation(fields: [userId], references: [id])
+    userId      Int
+    muscleGroup String
+    favorite    Boolean
+    workouts    WorkoutTemplate[]
+    sets        Set[]
 }
 
 model WorkoutTemplate {
@@ -38,4 +40,22 @@ model WorkoutTemplate {
     description String
     lastUse     DateTime?
     exercises   Exercise[]
+    workouts    Workout[]
+}
+
+model Workout {
+    id        Int             @id @default(autoincrement())
+    date      DateTime
+    user      User            @relation(fields: [userId], references: [id])
+    userId    Int
+    workout   WorkoutTemplate @relation(fields: [workoutId], references: [id])
+    workoutId Int
+}
+
+model Set {
+    id         Int      @id @default(autoincrement())
+    reps       Int
+    weight     Float
+    exercise   Exercise @relation(fields: [exerciseId], references: [id])
+    exerciseId Int
 }

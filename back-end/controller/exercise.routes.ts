@@ -1,5 +1,5 @@
 /**
- * @swagger
+ * @Swagger
  *   components:
  *     securitySchemes:
  *       bearerAuth:
@@ -58,6 +58,7 @@ const exerciseRouter = express.Router();
  *             $ref: '#/components/schemas/ExerciseInput'
  *     security:
  *       - bearerAuth: []
+ *     tags: [Exercises]
  *     responses:
  *       200:
  *         description: The exercise was successfully created
@@ -84,6 +85,7 @@ exerciseRouter.post('/', async (req: Request & { auth: any }, res: Response) => 
  *     summary: Get all exercises
  *     security:
  *       - bearerAuth: []
+ *     tags: [Exercises]
  *     responses:
  *       200:
  *         description: The list of all exercises
@@ -119,6 +121,7 @@ exerciseRouter.get('/getAllExercises', async (req: Request & { auth: any }, res:
  *           format: int64
  *     security:
  *       - bearerAuth: []
+ *     tags: [Exercises]
  *     responses:
  *       200:
  *         description: The exercise
@@ -151,6 +154,7 @@ exerciseRouter.get('/getExerciseById/:id', async (req: Request, res: Response) =
  *           format: int64
  *     security:
  *       - bearerAuth: []
+ *     tags: [Exercises]
  *     responses:
  *       200:
  *         description: The exercise was successfully deleted

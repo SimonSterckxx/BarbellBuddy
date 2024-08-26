@@ -1,6 +1,6 @@
 import { Exercise } from "./excercise";
 import { User } from "./user";
-import { Exercise as ExercisePrisma, User as UserPrisma, WorkoutTemplate as WorkoutTemplatePrisma } from '@prisma/client'
+import { Set as SetPrisma, Exercise as ExercisePrisma, User as UserPrisma, WorkoutTemplate as WorkoutTemplatePrisma } from '@prisma/client'
 
 export class WorkoutTemplate {
     readonly id?: number;
@@ -34,7 +34,7 @@ export class WorkoutTemplate {
         this.exercises.push(exercise)
     }
 
-    static from({ id, user, name, description, lastUse, exercises }: WorkoutTemplatePrisma & { user: UserPrisma } & { exercises: (ExercisePrisma & { user: UserPrisma })[] }) {
+    static from({ id, user, name, description, lastUse, exercises }: WorkoutTemplatePrisma & { user: UserPrisma } & { exercises: (ExercisePrisma & { user: UserPrisma } & { sets: SetPrisma[] })[] }) {
         return new WorkoutTemplate({
             id,
             user: User.from(user),

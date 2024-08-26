@@ -1,9 +1,7 @@
 import { User } from "../model/user";
 import database from "../../util/database";
-import { th } from "date-fns/locale";
 
 const createUser = async ({ username, password, role, age, weight, height }: User): Promise<User> => {
-    console.log('Creating user...');
     try {
         const userPrisma = await database.user.create({
             data: {

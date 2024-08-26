@@ -3,10 +3,11 @@ import exerciseDb from "../domain/data-access/exercise.db";
 import userDb from "../domain/data-access/user.db";
 import { Exercise } from "../domain/model/excercise";
 import { ExerciseInput } from "../types";
+import { Set } from "../domain/model/set";
 
 const createExercise = async ({ userId, name, muscleGroup, favorite }: ExerciseInput) => {
     const user = await userDb.getUserById(userId);
-    const exercise = new Exercise({ user, name, muscleGroup, favorite });
+    const exercise = new Exercise({ user, name, muscleGroup, favorite, sets: [] });
     return exerciseDb.createExercise(exercise);
 }
 

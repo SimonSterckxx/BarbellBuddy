@@ -1,7 +1,7 @@
 // Execute: npx ts-node util/seed.ts
 
 import { PrismaClient } from "@prisma/client";
-import { set } from "date-fns";
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -13,7 +13,7 @@ const main = async () => {
     const admin = await prisma.user.create({
         data: {
             username: 'Admin',
-            password: '$2a$12$/OBlXlQzkoCTFZ1Wm6T4bOx7yfXiRe0kCoe/hcRHmR6pyzdhax6lG',
+            password: await bcrypt.hash('admin123', 10),
             role: 'ADMIN',
             age: 22,
             weight: 95,
@@ -25,7 +25,7 @@ const main = async () => {
     const simon = await prisma.user.create({
         data: {
             username: 'Simon',
-            password: '1234',
+            password: await bcrypt.hash('simon123', 10),
             role: 'USER',
             age: 22,
             weight: 95,

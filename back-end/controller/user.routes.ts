@@ -49,6 +49,13 @@
  *           height:
  *             type: number
  *             format: int32
+ *       AuthenticationResponse:
+ *         type: object
+ *         properties:
+ *           username:
+ *             type: string
+ *           password:
+ *             type: string
  */
 
 import express, { NextFunction, Request, Response } from 'express';
@@ -70,6 +77,7 @@ const userRouter = express.Router();
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/UserInput'
+ *     tags: [Users]
  *     responses:
  *       '200':
  *          description: User created successfully
@@ -101,6 +109,7 @@ userRouter.post('/signup', async (req: Request, res: Response, next: NextFunctio
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/AuthenticationResponse'
+ *     tags: [Users]
  *     responses:
  *       '200':
  *         description: User logged in successfully
@@ -131,6 +140,7 @@ userRouter.post('/login', async (req: Request, res: Response, next: NextFunction
  *         description: The username of the user to retrieve
  *         schema:
  *           type: string
+ *     tags: [Users]
  *     responses:
  *       '200':
  *         description: A user object

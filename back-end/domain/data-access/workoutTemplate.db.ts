@@ -19,7 +19,8 @@ const createWorkoutTemplate = async ({ user, name, description, exercises }) => 
             include: {
                 exercises: {
                     include: {
-                        user: true
+                        user: true,
+                        sets: true
                     }
                 },
                 user: true
@@ -37,7 +38,8 @@ const getAllWorkoutTemplates = async (): Promise<WorkoutTemplate[]> => {
             include: {
                 user: true, exercises: {
                     include: {
-                        user: true
+                        user: true,
+                        sets: true
                     }
                 }
             }
@@ -59,7 +61,8 @@ const getWorkoutTemplatesForUser = async (user): Promise<WorkoutTemplate[]> => {
                 user: true,
                 exercises: {
                     include: {
-                        user: true
+                        user: true,
+                        sets: true
                     }
                 }
             }
@@ -78,7 +81,8 @@ const getWorkoutTemplateById = async (id: number): Promise<WorkoutTemplate | nul
                 user: true,
                 exercises: {
                     include: {
-                        user: true
+                        user: true,
+                        sets: true
                     }
                 }
             }

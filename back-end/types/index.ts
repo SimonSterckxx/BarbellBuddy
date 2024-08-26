@@ -22,6 +22,13 @@ export type ExerciseInput = {
     favorite: boolean;
 }
 
+export type SetInput = {
+    id?: number;
+    reps: number;
+    weight: number;
+    exerciseId: number;
+}
+
 export type WorkoutTemplateInput = {
     id?: number;
     userId: number;

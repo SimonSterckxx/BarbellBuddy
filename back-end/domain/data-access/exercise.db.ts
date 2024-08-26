@@ -15,7 +15,8 @@ const createExercise = async ({ user, name, muscleGroup, favorite }) => {
                 favorite,
             },
             include: {
-                user: true
+                user: true,
+                sets: true
             }
         });
         return Exercise.from(exercisePrisma);
@@ -27,7 +28,7 @@ const createExercise = async ({ user, name, muscleGroup, favorite }) => {
 
 const getAllExercises = async (): Promise<Exercise[]> => {
     try {
-        const exercisesPrisma = await database.exercise.findMany({ include: { user: true } });
+        const exercisesPrisma = await database.exercise.findMany({ include: { user: true, sets: true } });
         return exercisesPrisma.map(exercisePrisma => Exercise.from(exercisePrisma));
     } catch (error) {
         console.error(error);
@@ -38,7 +39,7 @@ const getExerciseById = async (id: number): Promise<Exercise | null> => {
     try {
         const exercisePrisma = await database.exercise.findUnique({
             where: { id },
-            include: { user: true }
+            include: { user: true, sets: true }
         });
         const exercise = exercisePrisma ? Exercise.from(exercisePrisma) : null
         return exercise
@@ -54,7 +55,8 @@ const getExercisesForUser = async (user) => {
                 userId: user.id
             },
             include: {
-                user: true
+                user: true,
+                sets: true
             }
         });
         const exercises = exercisesPrisma.map(exercisePrisma => Exercise.from(exercisePrisma));

@@ -60,6 +60,7 @@ const workoutTemplateRouter = express.Router();
  *             $ref: '#/components/schemas/WorkoutTemplate'
  *     security:
  *       - bearerAuth: []
+ *     tags: [Workout Templates]
  *     responses:
  *       200:
  *         description: The workout template was successfully created
@@ -86,6 +87,7 @@ workoutTemplateRouter.post('/', async (req: Request, res: Response) => {
  *     summary: Get all workout templates
  *     security:
  *       - bearerAuth: []
+ *     tags: [Workout Templates]
  *     responses:
  *       200:
  *         description: The list of workout templates
@@ -121,6 +123,7 @@ workoutTemplateRouter.get('/getAllWorkoutTemplates', async (req: Request & { aut
  *           description: The ID of the workout template
  *     security:
  *       - bearerAuth: []
+ *     tags: [Workout Templates]
  *     responses:
  *       200:
  *         description: The workout template
@@ -166,6 +169,7 @@ workoutTemplateRouter.get('/:id', async (req: Request, res: Response) => {
  *           description: The ID of the workout template
  *     security:
  *       - bearerAuth: []
+ *     tags: [Workout Templates]
  *     responses:
  *       200:
  *         description: The workout template was successfully deleted
@@ -225,6 +229,7 @@ workoutTemplateRouter.delete('/:id', async (req: Request, res: Response) => {
  *               - exerciseId
  *     security:
  *       - bearerAuth: []
+ *     tags: [Workout Templates]
  *     responses:
  *       200:
  *         description: The exercise was successfully added to the workout template
@@ -291,6 +296,7 @@ workoutTemplateRouter.put('/:id/addExerciseToWorkoutTemplate', async (req: Reque
  *               - exerciseId
  *     security:
  *       - bearerAuth: []
+ *     tags: [Workout Templates]
  *     responses:
  *       200:
  *         description: The exercise was successfully deleted from the workout template

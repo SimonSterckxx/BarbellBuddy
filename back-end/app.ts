@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import { userRouter } from './controller/user.routes';
 import { exerciseRouter } from './controller/exercise.routes';
 import { workoutTemplateRouter } from './controller/workoutTemplate.routes';
+import { setRouter } from './controller/set.routes';
 import { expressjwt } from 'express-jwt';
 import helmet from 'helmet';
 
@@ -26,6 +27,7 @@ app.use(expressjwt({
 app.use('/users', userRouter);
 app.use('/exercises', exerciseRouter);
 app.use('/workoutTemplates', workoutTemplateRouter);
+app.use('/sets', setRouter);
 
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });
@@ -35,9 +37,9 @@ const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Fitness Tracker API',
+            title: 'BarbellBuddy API',
             version: '1.0.0',
-            description: 'Fitness Tracker API Documentation',
+            description: 'BarbellBuddy API Documentation',
         },
     },
     apis: ['./controller/*.routes.ts'],
