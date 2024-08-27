@@ -7,6 +7,17 @@ const createSet = async ({ reps, weight, exerciseId }: SetInput) => {
     return setDb.createSet(set);
 }
 
+const getAllSets = async ({ username, role }) => {
+    if (role === 'User') {
+        return setDb.getSetsForUser(username);
+    }
+    if (role === 'Admin') {
+        return setDb.getAllSets();
+    }
+    throw new Error('You are not authorized to access this resource.');
+}
+
 export default {
-    createSet
+    createSet,
+    getAllSets
 };

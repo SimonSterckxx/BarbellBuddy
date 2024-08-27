@@ -79,6 +79,40 @@ const deleteExerciseById = async (id: number) => {
     }
 }
 
+const addSetToExercise = async (exerciseId: number, setId: number) => {
+    try {
+        await database.exercise.update({
+            where: { id: exerciseId },
+            data: {
+                sets: {
+                    connect: {
+                        id: setId
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const deleteSetFromExercise = async (exerciseId: number, setId: number) => {
+    try {
+        await database.exercise.update({
+            where: { id: exerciseId },
+            data: {
+                sets: {
+                    disconnect: {
+                        id: setId
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export default {
     createExercise,
     getAllExercises,
@@ -86,4 +120,6 @@ export default {
     getExercisesForUser,
     // getAllExercisesByUserId,
     deleteExerciseById,
+    addSetToExercise,
+    deleteSetFromExercise
 };

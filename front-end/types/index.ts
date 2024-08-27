@@ -21,6 +21,7 @@ export type Exercise = {
     muscleGroup: string;
     favorite: boolean;
     createdAt: string;
+    sets: Set[];
 }
 
 export type WorkoutTemplate = {
@@ -29,6 +30,20 @@ export type WorkoutTemplate = {
     name: string;
     exercises: Exercise[];
     createdAt?: string;
+}
+
+export type Set = {
+    id?: number;
+    reps: number;
+    weight: number;
+    exerciseId: number;
+    createdAt: string;
+}
+
+export type SetInput = {
+    reps: number;
+    weight: number;
+    exerciseId: number;
 }
 
 export type StatusMessage = {

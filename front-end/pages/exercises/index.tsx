@@ -4,6 +4,7 @@ import Header from '../../components/header';
 import ExerciseOverviewTable from '../../components/exercise/exerciseOverviewTable';
 import ExerciseService from '@/services/ExerciseService';
 import useSWR from 'swr';
+import SetService from '@/services/SetService';
 
 const Exercises: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
@@ -21,6 +22,8 @@ const Exercises: React.FC = () => {
             setExercises(exercises);
         }
     }
+
+
 
     const handleRefreshTable = async () => {
         try {

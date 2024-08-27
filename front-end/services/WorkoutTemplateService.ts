@@ -16,7 +16,7 @@ const getAllWorkoutTemplates = async () => {
         })
 };
 
-const getWorkoutTemplateById = async (id: number) => {
+const getWorkoutTemplateById = async (id: string) => {
     const loggedInUserString = sessionStorage.getItem('loggedInUser');
     let token = null;
     if (loggedInUserString !== null) {

@@ -90,8 +90,19 @@ setRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
         const set = await setService.createSet({ reps, weight, exerciseId });
         res.status(200).json(set);
     } catch (error) {
-        res.status(400).json({ message: 'Could not create set' });
+        next(error)
     }
 });
+
+setRouter.get('/getAllSets', async (req: Request & { auth: any }, res: Response, next: NextFunction) => {
+    try {
+        const { username, role } = req.auth;
+        const set = await setService.getAllSets({ username, role });
+        res.status(200).json(set)
+    } catch (error) {
+        next(error)
+    }
+
+})
 
 export { setRouter };

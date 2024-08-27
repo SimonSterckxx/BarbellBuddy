@@ -12,6 +12,7 @@ const createExercise = async ({ userId, name, muscleGroup, favorite }: ExerciseI
 }
 
 const getAllExercises = async ({ username, role }) => {
+    console.log('role', role)
     if (role === 'User') {
         const user = await userDb.getUserByUsername(username);
         return exerciseDb.getExercisesForUser(user);
@@ -37,10 +38,20 @@ const deleteExerciseById = (id: number) => {
     exerciseDb.deleteExerciseById(id);
 }
 
+const addSetToExercise = (exerciseId: number, setId: number) => {
+    return exerciseDb.addSetToExercise(exerciseId, setId);
+}
+
+const deleteSetFromExercise = (exerciseId: number, setId: number) => {
+    return exerciseDb.deleteSetFromExercise(exerciseId, setId);
+}
+
 
 export default {
     createExercise,
     getAllExercises,
     getExerciseById,
-    deleteExerciseById
+    deleteExerciseById,
+    addSetToExercise,
+    deleteSetFromExercise
 };

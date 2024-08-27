@@ -16,6 +16,35 @@ const createSet = async ({ reps, weight, exerciseId }: Set): Promise<Set> => {
     }
 };
 
+const getAllSets = async (): Promise<Set[]> => {
+    try {
+        const setsPrisma = await database.set.findMany();
+        return setsPrisma.map((set) => Set.from(set));
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const getSetsForUser = async (username: string): Promise<Set[]> => {
+    try {
+        const setsPrisma = await database.set.findMany({
+            where: {
+                exercise: {
+                    user: {
+                        username: username
+                    }
+                }
+            }
+        });
+        return setsPrisma.map((set) => Set.from(set));
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 export default {
-    createSet
+    createSet,
+    getAllSets,
+    getSetsForUser
 };

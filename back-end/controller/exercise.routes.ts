@@ -173,5 +173,85 @@ exerciseRouter.delete('/:id', async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * @swagger
+ * /exercises/addSetToExercise/{exerciseId}/{setId}:
+ *   put:
+ *     summary: Add a set to an exercise
+ *     parameters:
+ *       - in: path
+ *         name: exerciseId
+ *         required: true
+ *         schema:
+ *           type: number
+ *           format: int64
+ *       - in: path
+ *         name: setId
+ *         required: true
+ *         schema:
+ *           type: number
+ *           format: int64
+ *     security:
+ *       - bearerAuth: []
+ *     tags: [Exercises]
+ *     responses:
+ *       200:
+ *         description: The set was successfully added to the exercise
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Exercise'
+ */
+exerciseRouter.put('/addSetToExercise/:exerciseId/:setId', async (req: Request, res: Response) => {
+    try {
+        const exerciseId = parseInt(req.params.exerciseId);
+        const setId = parseInt(req.params.setId);
+        const exercise = await exerciseService.addSetToExercise(exerciseId, setId);
+        res.status(200).json(exercise);
+    } catch (error) {
+        res.status(400).json({ status: "error", errorMessage: error.message });
+    }
+});
+
+/**
+ * @swagger
+ * /exercises/deleteSetFromExercise/{exerciseId}/{setId}:
+ *   put:
+ *     summary: Delete a set from an exercise
+ *     parameters:
+ *       - in: path
+ *         name: exerciseId
+ *         required: true
+ *         schema:
+ *           type: number
+ *           format: int64
+ *       - in: path
+ *         name: setId
+ *         required: true
+ *         schema:
+ *           type: number
+ *           format: int64
+ *     security:
+ *       - bearerAuth: []
+ *     tags: [Exercises]
+ *     responses:
+ *       200:
+ *         description: The set was successfully deleted from the exercise
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Exercise'
+ */
+exerciseRouter.put('/deleteSetFromExercise/:exerciseId/:setId', async (req: Request, res: Response) => {
+    try {
+        const exerciseId = parseInt(req.params.exerciseId);
+        const setId = parseInt(req.params.setId);
+        const exercise = await exerciseService.deleteSetFromExercise(exerciseId, setId);
+        res.status(200).json(exercise);
+    } catch (error) {
+        res.status(400).json({ status: "error", errorMessage: error.message });
+    }
+});
+
 
 export { exerciseRouter };

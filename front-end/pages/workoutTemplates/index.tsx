@@ -14,24 +14,30 @@ const WorkoutTemplates: React.FC = () => {
     const [exercises, setExercises] = useState<Exercise[]>([]);
 
     const getWorkoutTemplatesAndExercises = async () => {
+        try {
+            const [workoutTemplatesResponse, exercisesResponse] = await Promise.all([
+                WorkoutTemplateService.getAllWorkoutTemplates(),
+                ExerciseService.getAllExercises()
+            ]);
 
-        const responses = await Promise.all([WorkoutTemplateService.getAllWorkoutTemplates(), ExerciseService.getAllExercises()])
-        responses.forEach(async response => {
-            if (!response.ok) {
-                if (response.status === 401) {
+            if (!workoutTemplatesResponse.ok || !exercisesResponse.ok) {
+                if (workoutTemplatesResponse.status === 401 || exercisesResponse.status === 401) {
                     setError("You are not authorized to view this page. Please login first!");
                 } else {
-                    setError(response.statusText);
+                    setError(workoutTemplatesResponse.statusText || exercisesResponse.statusText);
                 }
+                return;
             }
-            else {
-                const [workoutTemplatesResponse, exercisesResponse] = responses;
-                const workoutTemplates = await workoutTemplatesResponse.json();
-                const exercises = await exercisesResponse.json();
-                setWorkoutTemplates(workoutTemplates);
-                setExercises(exercises);
-            }
-        });
+
+            const workoutTemplates = await workoutTemplatesResponse.json();
+            const exercises = await exercisesResponse.json();
+
+            setWorkoutTemplates(workoutTemplates);
+            setExercises(exercises);
+        } catch (error) {
+            setError("An unexpected error occurred.");
+            console.error(error);
+        }
     };
 
     useEffect(() => {

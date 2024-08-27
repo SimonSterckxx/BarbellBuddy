@@ -6,13 +6,15 @@ export class Set {
     readonly reps: number;
     readonly weight: number;
     readonly exerciseId: number;
+    readonly createdAt?: Date;
 
-    constructor({ id, reps, weight, exerciseId }: { id?: number; reps: number; weight: number; exerciseId: number }) {
+    constructor({ id, reps, weight, exerciseId, createdAt }: { id?: number; reps: number; weight: number; exerciseId: number; createdAt?: Date }) {
         // this.validate({ id, reps, weight })
         this.id = id
         this.reps = reps
         this.weight = weight
         this.exerciseId = exerciseId
+        this.createdAt = createdAt
     }
 
     // validate(set: { id?: number; reps: number; weight: number; }) {
@@ -31,7 +33,7 @@ export class Set {
     //     )
     // }
 
-    static from({ id, reps, weight, exerciseId }: SetPrisma) {
-        return new Set({ id, reps, weight, exerciseId });
+    static from({ id, reps, weight, exerciseId, createdAt }: SetPrisma) {
+        return new Set({ id, reps, weight, exerciseId, createdAt });
     }
 }

@@ -58,4 +58,5 @@ model Set {
     weight     Float
     exercise   Exercise @relation(fields: [exerciseId], references: [id])
     exerciseId Int
+    createdAt  DateTime @default(now())
 }

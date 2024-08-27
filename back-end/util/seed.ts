@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 
 const main = async () => {
     await prisma.workoutTemplate.deleteMany()
+    await prisma.set.deleteMany()
     await prisma.exercise.deleteMany()
     await prisma.user.deleteMany()
 
@@ -14,7 +15,7 @@ const main = async () => {
         data: {
             username: 'Admin',
             password: await bcrypt.hash('admin123', 10),
-            role: 'ADMIN',
+            role: 'Admin',
             age: 22,
             weight: 95,
             height: 193,
@@ -26,7 +27,7 @@ const main = async () => {
         data: {
             username: 'Simon',
             password: await bcrypt.hash('simon123', 10),
-            role: 'USER',
+            role: 'User',
             age: 22,
             weight: 95,
             height: 193,
@@ -43,6 +44,18 @@ const main = async () => {
             name: 'Bench Press',
             muscleGroup: 'Chest',
             favorite: true
+        }
+    })
+
+    const benchPressSet1 = await prisma.set.create({
+        data: {
+            reps: 10,
+            weight: 60,
+            exercise: {
+                connect: {
+                    id: benchPress.id
+                }
+            }
         }
     })
 

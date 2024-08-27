@@ -1,4 +1,4 @@
-import { Exercise } from "../../types";
+import { Exercise, Set } from "../../types";
 import React, { useState } from "react";
 import AddExerciseForm from "./addExerciseForm";
 import ExerciseService from "@/services/ExerciseService";
